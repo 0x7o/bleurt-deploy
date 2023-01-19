@@ -7,6 +7,6 @@ RUN pip install -r requirements.txt
 # Copy the rest of the code
 COPY . .
 
-# Run the app
+# Run the app using uvicorn
 EXPOSE 5000
-CMD ["python", "app.py"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000"]
