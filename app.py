@@ -21,11 +21,12 @@ def predict(data: dict):
     candidates = data["candidates"]
     with torch.no_grad():
         scores = (
-            model(**tokenizer(references, candidates, return_tensors="pt").to("cuda"))[
-                0
-            ]
+            model(
+                **tokenizer(
+                    references, candidates, return_tensors="pt", padding=True
+                ).to("cuda")
+            )[0]
             .squeeze()
             .tolist()
         )
     return {"scores": scores}
-
